@@ -1,6 +1,6 @@
 package com.mercadolibre.lannister.charges.kafka;
 
-import com.mercadolibre.lannister.charges.EventApi;
+import com.mercadolibre.lannister.charges.Event;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,12 +31,12 @@ public class KafkaConfigProducer {
     }
 
     @Bean
-    public ProducerFactory<String, EventApi> producerFactory() {
+    public ProducerFactory<String, Event> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, EventApi> kafkaTemplate() {
+    public KafkaTemplate<String, Event> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }

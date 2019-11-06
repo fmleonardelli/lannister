@@ -25,7 +25,7 @@ public class ChargesService {
     @Autowired
     NotificationRepository repository;
 
-    Either<Throwable, ChargeNotification> notifyCharge(EventApi event) {
+    Either<Throwable, ChargeNotification> notifyCharge(Event event) {
         val notificationCharge = ChargeNotification.map().apply(event);
         val res = repository.save(notificationCharge).map(r -> r);
         if (res.isRight()) {
@@ -39,11 +39,11 @@ public class ChargesService {
        return repository.findAll();
     }
 
-    private void notifyToQueue(EventApi event, ChargeNotification chargeNotification) {
-        ListenableFuture<SendResult<String, EventApi>> notify = producer.sendMessage(event);
-        notify.addCallback(new ListenableFutureCallback<SendResult<String, EventApi>>() {
+    private void notifyToQueue(Event event, ChargeNotification chargeNotification) {
+        ListenableFuture<SendResult<String, Event>> notify = producer.sendMessage(event);
+        notify.addCallback(new ListenableFutureCallback<SendResult<String, Event>>() {
             @Override
-            public void onSuccess(SendResult<String, EventApi> result) {
+            public void onSuccess(SendResult<String, Event> result) {
                 updateNotifyState(chargeNotification.withState(NotificationState.PROCESSED));
             }
 

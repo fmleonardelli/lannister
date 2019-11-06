@@ -1,6 +1,6 @@
 package com.mercadolibre.lannister.charges.kafka;
 
-import com.mercadolibre.lannister.charges.EventApi;
+import com.mercadolibre.lannister.charges.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -12,12 +12,12 @@ import org.springframework.util.concurrent.ListenableFuture;
 public class KafkaMessageProducer {
 
     @Autowired
-    private KafkaTemplate<String, EventApi> kafkaTemplate;
+    private KafkaTemplate<String, Event> kafkaTemplate;
 
     @Value(value = "${message.topic.name}")
     private String topicName;
 
-    public ListenableFuture<SendResult<String, EventApi>> sendMessage(EventApi eventApi) {
+    public ListenableFuture<SendResult<String, Event>> sendMessage(Event eventApi) {
         return kafkaTemplate.send(topicName, eventApi);
     }
 }

@@ -1,27 +1,24 @@
 package com.mercadolibre.lannister.charges.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mercadolibre.lannister.charges.EventApi;
+import com.mercadolibre.lannister.charges.Event;
 import io.vavr.Function1;
 import io.vavr.control.Option;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 
 import java.time.Instant;
 
-@Value
-@AllArgsConstructor(onConstructor = @__(@JsonCreator), access = AccessLevel.PRIVATE)
+@Getter
+@Setter
 @Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChargeNotification {
 
      String type;
      String eventId;
      Double amount;
      String currency;
-     Long userId;
+     String userId;
      Instant date;
      NotificationState state;
      Option<Instant> processedDate;
@@ -31,16 +28,17 @@ public class ChargeNotification {
           return toBuilder().state(state).build();
      }
 
-     public static Function1<EventApi, ChargeNotification> map() {
-          return x -> new ChargeNotification(
-                  x.getEventType(),
-                  x.getEventId().toString(),
-                  x.getAmount(),
-                  x.getCurrency(),
-                  x.getUserId(),
-                  x.getDate(),
-                  NotificationState.PENDING,
-                  Option.of(Instant.now()),
-                  1L);
+     public static Function1<Event, ChargeNotification> map() {
+          return x -> ChargeNotification.builder()
+                  .type(x.getEventType())
+                  .eventId(x.getEventId().toString())
+                  .amount(x.getAmount())
+                  .currency(x.getCurrency())
+                  .userId(x.getUserId())
+                  .date(x.getDate())
+                  .state(NotificationState.PENDING)
+                  .processedDate(Option.of(Instant.now()))
+                  .version(1L)
+                  .build();
      }
 }

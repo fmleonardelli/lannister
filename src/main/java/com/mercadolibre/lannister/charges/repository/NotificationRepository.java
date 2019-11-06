@@ -3,8 +3,8 @@ package com.mercadolibre.lannister.charges.repository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mercadolibre.lannister.charges.model.ChargeNotification;
 import com.mongodb.MongoClient;
-import com.mongodb.WriteConcern;
 import com.mongodb.client.model.IndexOptions;
+import io.vavr.Function1;
 import io.vavr.collection.List;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
@@ -35,10 +35,17 @@ public class NotificationRepository {
          this.collection.createIndex(new Document("processedDate", 1));
      }
 
+     private Either<Throwable, ChargeNotification> insert(ChargeNotification notification) {
+         try {
+             collection.insert(notification);
+             return Either.right(notification);
+         } catch (Exception ex) {
+             return Either.left(ex);
+         }
+     }
+
      public Either<Throwable, ChargeNotification> save(ChargeNotification notification) {
-         RepositorySave repo = () -> collection.save(notification, WriteConcern.ACKNOWLEDGED);
-         val res = Try.of(repo ::save).toEither();
-         return res.map(r -> notification);
+         return insert(notification);
      }
 
      public Either<Throwable, ChargeNotification> update(ChargeNotification notification) {

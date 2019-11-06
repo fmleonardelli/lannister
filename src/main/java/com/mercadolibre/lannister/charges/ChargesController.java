@@ -16,7 +16,7 @@ public class ChargesController {
     private ChargesService chargesService;
 
     @PostMapping("charges")
-    public String notifyCharge(@RequestBody EventApi event) {
+    public String notifyCharge(@RequestBody Event event) {
         val res = chargesService.notifyCharge(event);
         if (res.isRight()) {
             return "OK";
