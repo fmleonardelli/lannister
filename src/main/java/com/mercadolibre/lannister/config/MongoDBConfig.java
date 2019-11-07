@@ -37,6 +37,6 @@ public class MongoDBConfig {
 
     @Bean
     public NotificationRepository notificationRepository(MongoClient mongoClient) {
-        return new NotificationRepository(mongoClient, databaseName, "chargesCollection", mongoObjectMapper());
+        return new NotificationRepository(mongoClient, databaseName, "charges", mongoObjectMapper());
     }
 }

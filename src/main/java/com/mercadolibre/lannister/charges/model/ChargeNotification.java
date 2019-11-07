@@ -2,6 +2,7 @@ package com.mercadolibre.lannister.charges.model;
 
 import com.mercadolibre.lannister.charges.EventApi;
 import io.vavr.Function1;
+import io.vavr.control.Either;
 import io.vavr.control.Option;
 import lombok.*;
 
