@@ -1,7 +1,7 @@
 package com.mercadolibre.lannister.charges;
 
 import com.mercadolibre.lannister.api.Paginated;
-import lombok.val;
+import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +16,12 @@ public class ChargesController implements Controller<EventApi>{
     private ChargesService chargesService;
 
     @PostMapping("charges")
-    public String notifyCharge(@RequestBody EventApi event) {
-        val res = chargesService.notifyCharge(event);
-        return "OK";
+    public ResponseEntity<EventApi> notifyCharge(@RequestBody EventApi event) {
+        return convertToResponse(chargesService.notifyCharge(event));
     }
 
     @GetMapping("charges")
     public ResponseEntity<Paginated<EventApi>> getAll() throws Throwable {
-        return convertToPaginated(chargesService.findAll());
+        return convertToResponsePaginated(chargesService.findAll());
     }
 }

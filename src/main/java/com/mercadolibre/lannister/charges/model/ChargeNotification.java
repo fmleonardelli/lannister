@@ -8,10 +8,12 @@ import lombok.*;
 
 import java.time.Instant;
 
+import static io.vavr.API.For;
+
 @Value
 @Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ChargeNotification {
+public class ChargeNotification implements ChargeNotificationValidator {
 
      String type;
      String eventId;
@@ -27,7 +29,14 @@ public class ChargeNotification {
           return toBuilder().state(state).build();
      }
 
-     public static Function1<EventApi, ChargeNotification> map() {
+     Either<Throwable, ChargeNotification> validate() {
+          return checkType(this.type)
+                  .flatMap(t -> checkCurrency(this.currency)
+                          .flatMap(c -> checkAmount(this.amount)
+                                  .map(a -> this)));
+     }
+
+     public static Function1<EventApi, Either<Throwable, ChargeNotification>> map() {
           return x -> ChargeNotification.builder()
                   .type(x.getEventType())
                   .eventId(x.getEventId())
@@ -38,6 +47,6 @@ public class ChargeNotification {
                   .state(NotificationState.PENDING)
                   .processedDate(Option.of(Instant.now()))
                   .version(1L)
-                  .build();
+                  .build().validate();
      }
 }

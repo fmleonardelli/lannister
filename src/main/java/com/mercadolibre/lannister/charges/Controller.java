@@ -8,9 +8,9 @@ import org.springframework.http.ResponseEntity;
 
 public interface Controller<T> {
     default ResponseEntity<T> convertToResponse(Either<Throwable, T> res) {
-        return res.map(t -> new ResponseEntity<T>(HttpStatus.OK)).getOrElse(new ResponseEntity<T>(HttpStatus.INTERNAL_SERVER_ERROR));
+        return res.map(t -> new ResponseEntity<T>(t, HttpStatus.OK)).getOrElse(new ResponseEntity<T>(HttpStatus.INTERNAL_SERVER_ERROR));
     }
-    default ResponseEntity<Paginated<T>> convertToPaginated(Either<Throwable, List<T>> res) {
+    default ResponseEntity<Paginated<T>> convertToResponsePaginated(Either<Throwable, List<T>> res) {
         return res.map(t -> new ResponseEntity<>(new Paginated<T>(t, 0, 0), HttpStatus.OK)).getOrElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }
 }

@@ -25,18 +25,18 @@ public class ChargesService {
     @Autowired
     NotificationRepository repository;
 
-    Either<Throwable, ChargeNotification> notifyCharge(EventApi event) {
+    Either<Throwable, EventApi> notifyCharge(EventApi event) {
         val notificationCharge = ChargeNotification.map().apply(event);
-        val res = repository.save(notificationCharge).map(r -> r);
+        val res = notificationCharge.flatMap(n -> repository.save(n));
         if (res.isRight()) {
-            notifyToQueue(event, notificationCharge);
+            notifyToQueue(event, notificationCharge.get());
         }
 
-        return res;
+        return res.map(r -> EventApi.toEventApi().apply(r));
     }
 
     Either<Throwable, List<EventApi>> findAll() {
-        return repository.findAll().map(res ->  res.map(c -> EventApi.toEventApi().apply(c)));
+        return repository.findAll().map(res -> res.map(c -> EventApi.toEventApi().apply(c)));
     }
 
     private void notifyToQueue(EventApi event, ChargeNotification chargeNotification) {

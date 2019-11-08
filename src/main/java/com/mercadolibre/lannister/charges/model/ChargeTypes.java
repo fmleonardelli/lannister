@@ -1,18 +1,18 @@
 package com.mercadolibre.lannister.charges.model;
 
 import io.vavr.collection.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public enum ChargeTypes {
 
     MARKETPLACE("MARKETPLACE", List.of("CLASIFICADO", "VENTA", "ENVÍO")),
     SERVICES("CREDITO", List.of("FIDELIDAD", "PUBLICIDAD")),
-    EXTERN("EXTERNO", List.of("MERCADOPAGO", "MERCADOSHOP"));
+    EXTERNAL("EXTERNO", List.of("MERCADOPAGO", "MERCADOSHOP"));
 
-    private String category;
-    private List<String> types;
-
-    private ChargeTypes(String category, List<String> types) {
-        this.category = category;
-        this.types = types;
-    }
+    String category;
+    List<String> types;
 }
