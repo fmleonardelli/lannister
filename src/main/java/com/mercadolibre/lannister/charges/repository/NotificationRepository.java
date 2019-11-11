@@ -5,6 +5,7 @@ import com.mercadolibre.lannister.charges.model.ChargeNotification;
 import com.mongodb.MongoClient;
 import com.mongodb.client.model.IndexOptions;
 import io.vavr.collection.List;
+import io.vavr.collection.Map;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import lombok.AccessLevel;
@@ -12,11 +13,15 @@ import lombok.experimental.FieldDefaults;
 import lombok.val;
 import org.bson.Document;
 import org.mongojack.JacksonMongoCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class NotificationRepository {
+
+    Logger logger = LoggerFactory.getLogger(NotificationRepository.class);
 
     JacksonMongoCollection<ChargeNotification> collection;
     ObjectMapper objectMapper;
@@ -28,13 +33,19 @@ public class NotificationRepository {
          this.objectMapper = mapper;
 
          this.collection.createIndex(new Document("type", 1));
-         this.collection.createIndex(new Document("eventId", 1), new IndexOptions().unique(true));
+         Map<String, Object> uniques = io.vavr.collection.HashMap.of("type", 1, "eventId", 1);
+         this.collection.createIndex(new Document(uniques.toJavaMap()), new IndexOptions().unique(true));
          this.collection.createIndex(new Document("state", 1));
          this.collection.createIndex(new Document("date", 1));
          this.collection.createIndex(new Document("processedDate", 1));
      }
 
-     private Either<Throwable, ChargeNotification> insert(ChargeNotification notification) {
+    public Either<Throwable, List<ChargeNotification>> findAll() {
+        RepositoryFind<ChargeNotification> repo = collection::find;
+        return Try.of(repo :: find).toEither().map(List::ofAll);
+    }
+
+     Either<Throwable, ChargeNotification> insert(ChargeNotification notification) {
          try {
              collection.insert(notification);
              return Either.right(notification);
@@ -44,6 +55,7 @@ public class NotificationRepository {
      }
 
      public Either<Throwable, ChargeNotification> save(ChargeNotification notification) {
+         logger.info("Save with params: " + notification.toString());
          return insert(notification);
      }
 
@@ -54,15 +66,11 @@ public class NotificationRepository {
          update.put("$inc", new Document("version", 1));
 
          val query = new HashMap<String, Object>();
-         query.put("_id", notification.getEventId());
+         query.put("type", notification.getType());
+         query.put("eventId", notification.getEventId());
          query.put("version", notification.getVersion());
 
          RepositoryUpdate repo = () -> collection.findAndModify(new Document(query), new Document(), new Document(), collection.serializeFields(update), true, false);
          return Try.of(repo :: findAndModify).toEither();
-     }
-
-     public Either<Throwable, List<ChargeNotification>> findAll() {
-         RepositoryFind<ChargeNotification> repo = collection::find;
-         return Try.of(repo :: find).toEither().map(List::ofAll);
      }
 }

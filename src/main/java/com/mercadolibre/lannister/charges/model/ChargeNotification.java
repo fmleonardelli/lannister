@@ -14,7 +14,6 @@ import static io.vavr.API.For;
 @Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChargeNotification implements ChargeNotificationValidator {
-
      String type;
      String eventId;
      Double amount;
