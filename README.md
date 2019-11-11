@@ -21,7 +21,7 @@ Si se utiliza la versión de java, openJDK es probable que haya componentes que 
 La utilización de lombok no está limitada solo por los features de generación de getter/setter y constructors sino que también se usa para manejar inmutabilidad entre otros.
 
 Además, se utilizó una libreria llamada Vavr para agregar carácteristicas funcionales.
-**Ciertos features de esta biblioteca no son reconocidos por el IDE; esto se tiene que tener en cuenta al momento de descargar el proyecto, ya que el mismo compila y funciona correctamente.**
+**Ciertos features de esta biblioteca no son reconocidos por el IDE y los marca como error cuando no lo son; esta advertencia se tiene que tener en cuenta al momento de descargar el proyecto, ya que el mismo compila y funciona correctamente.**
 
 ### Ejecución
 Lannister es una aplicación desarrollada sobre el framework spring boot. 
