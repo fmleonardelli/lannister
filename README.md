@@ -24,7 +24,7 @@ Además, se utilizó una libreria llamada Vavr para agregar carácteristicas fun
 **Ciertos features de esta biblioteca no son reconocidos por el IDE; esto se tiene que tener en cuenta al momento de descargar el proyecto, ya que el mismo compila y funciona correctamente.**
 
 ### Ejecución
-Lannister es una aplicación desarrollado sobre el framework spring boot. 
+Lannister es una aplicación desarrollada sobre el framework spring boot. 
 
 Para lanzarla se debe ejecutar el comando **mvn spring-boot:run** en la carpeta root del proyecto. 
 
