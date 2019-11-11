@@ -1,6 +1,8 @@
 ## Lannister
 Lannister es la aplicación responsable de realizar las notificaciones de eventos que generan cargos para los usuarios de Mercado Libre.
 
+![Nombre de proyecto](https://srv.latostadora.com/designall.dll/un_lannister_siempre_paga_sus_deudas--i:1413853260381413859;x:9;w:520;m:1.jpg)
+
 ### Pre-Requisitos
 El proyecto para un correcto funcionamiento requiere tener instalado el siguiente stack de tecnologías:
 - [Java Development Kit 8 Oracle](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
