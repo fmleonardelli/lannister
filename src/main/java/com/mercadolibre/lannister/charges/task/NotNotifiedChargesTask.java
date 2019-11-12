@@ -4,11 +4,10 @@ import com.mercadolibre.lannister.charges.ChargesService;
 import com.mercadolibre.lannister.charges.EventApi;
 import com.mercadolibre.lannister.charges.kafka.KafkaService;
 import com.mercadolibre.lannister.charges.model.ChargeNotification;
-import com.mercadolibre.lannister.charges.repository.NotificationRepository;
+import com.mercadolibre.lannister.charges.repo.NotificationRepository;
+import com.mercadolibre.lannister.charges.repo.TaskParametersRepository;
 import io.vavr.collection.List;
 import lombok.val;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +24,7 @@ public class NotNotifiedChargesTask extends PlannedTask<ChargeNotification> {
     KafkaService kafkaService;
 
     protected List<ChargeNotification> getDataToProcess() {
-        val dataToProcess = repository.findAll();
+        val dataToProcess = repository.findBy(new TaskParametersRepository());
         if (dataToProcess.isLeft()) {
             logger.error("Get Data to Process", dataToProcess.getLeft());
         }

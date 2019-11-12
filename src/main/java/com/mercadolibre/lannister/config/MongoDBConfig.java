@@ -5,17 +5,14 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import com.mercadolibre.lannister.charges.repository.NotificationRepository;
-import com.mercadolibre.lannister.config.CustomDateModule;
+import com.mercadolibre.lannister.charges.repo.NotificationRepository;
 import com.mongodb.MongoClient;
 import io.vavr.jackson.datatype.VavrModule;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class MongoDBConfig {

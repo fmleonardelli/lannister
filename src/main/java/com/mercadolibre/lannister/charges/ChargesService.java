@@ -1,20 +1,17 @@
 package com.mercadolibre.lannister.charges;
 
-import com.mercadolibre.lannister.charges.kafka.KafkaMessageProducer;
+import com.mercadolibre.lannister.charges.api.ChargesParametersApi;
+import com.mercadolibre.lannister.charges.api.Paginated;
 import com.mercadolibre.lannister.charges.kafka.KafkaService;
 import com.mercadolibre.lannister.charges.model.ChargeNotification;
-import com.mercadolibre.lannister.charges.model.NotificationState;
-import com.mercadolibre.lannister.charges.repository.NotificationRepository;
-import io.vavr.collection.List;
+import com.mercadolibre.lannister.charges.repo.ChargesParametersRepository;
+import com.mercadolibre.lannister.charges.repo.NotificationRepository;
 import io.vavr.control.Either;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -32,12 +29,12 @@ public class ChargesService {
         if (res.isRight()) {
             kafkaService.notifyToQueue(event, notificationCharge.get());
         }
-
         return res.map(r -> EventApi.toEventApi().apply(r));
     }
 
-    Either<Throwable, List<EventApi>> findAll() {
-        return repository.findAll().map(res -> res.map(c -> EventApi.toEventApi().apply(c)));
+    Either<Throwable, Paginated<EventApi>> findCharges(ChargesParametersApi parametersApi) {
+        val parametersRepository = new ChargesParametersRepository(parametersApi);
+        return repository.findByPaginated(parametersRepository).map(r -> new Paginated<>(r.getItems().map(c -> EventApi.toEventApi().apply(c)), r.getOffset(), r.getLimit(), r.getTotal()));
     }
 
 }

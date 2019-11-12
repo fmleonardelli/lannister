@@ -1,4 +1,4 @@
-package com.mercadolibre.lannister.charges.repository;
+package com.mercadolibre.lannister.charges.repo.interfaces;
 
 import com.mongodb.client.result.UpdateResult;
 

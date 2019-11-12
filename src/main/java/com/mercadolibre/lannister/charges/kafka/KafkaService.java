@@ -3,7 +3,7 @@ package com.mercadolibre.lannister.charges.kafka;
 import com.mercadolibre.lannister.charges.EventApi;
 import com.mercadolibre.lannister.charges.model.ChargeNotification;
 import com.mercadolibre.lannister.charges.model.NotificationState;
-import com.mercadolibre.lannister.charges.repository.NotificationRepository;
+import com.mercadolibre.lannister.charges.repo.NotificationRepository;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.support.SendResult;

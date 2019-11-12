@@ -1,4 +1,4 @@
-package com.mercadolibre.lannister.charges.repository;
+package com.mercadolibre.lannister.charges.repo.interfaces;
 
 @FunctionalInterface
 public interface RepositoryFind<T> {

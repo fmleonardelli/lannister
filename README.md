@@ -11,7 +11,7 @@ El proyecto para un correcto funcionamiento requiere tener instalado el siguient
 - [Apache Kafka](https://kafka.apache.org/): la app se comunica con otros microservicios mediante una cola de mensajería en la cual cumple el rol de productor. El servicio de mensajería tiene que estar configurado para escuchar tráfico por el puerto 9092.
 
 ### Configuración
-El Ide utilizado para el desarrollo de la app fue IntelliJ, por lo tanto, si se quiere utilizar otro se deberá buscar las alternativas propuestas por el entorno utilizado.
+El IDE utilizado para el desarrollo de la app fue IntelliJ, por lo tanto, si se quiere utilizar otro se deberá buscar las alternativas propuestas por el entorno utilizado.
 
 _Config Intellij_
 - Plugin Lombok
@@ -20,9 +20,9 @@ _Config Intellij_
 #### Notas
 Si se utiliza la versión de java, openJDK es probable que haya componentes que no compilen. 
 
-La utilización de lombok no está limitada solo por los features de generación de getter/setter y constructors sino que también se usa para manejar inmutabilidad entre otros.
+La utilización de lombok no está limitada solo por los features de generación de getter/setter y constructors sino que también se usa para manejar inmutabilidad, entre otros.
 
-Además, se utilizó una libreria llamada Vavr para agregar carácteristicas funcionales.
+Además, se utilizó una biblioteca llamada Vavr para agregar carácteristicas funcionales.
 **Ciertos features de esta biblioteca no son reconocidos por el IDE y los marca como error cuando no lo son; esta advertencia se tiene que tener en cuenta al momento de descargar el proyecto, ya que el mismo compila y funciona correctamente.**
 
 ### Ejecución

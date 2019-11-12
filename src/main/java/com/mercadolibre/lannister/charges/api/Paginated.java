@@ -1,4 +1,4 @@
-package com.mercadolibre.lannister.api;
+package com.mercadolibre.lannister.charges.api;
 
 import io.vavr.collection.List;
 import lombok.AccessLevel;
@@ -11,4 +11,5 @@ public class Paginated<T> {
     List<T> items;
     Integer offset;
     Integer limit;
+    Long total;
 }
