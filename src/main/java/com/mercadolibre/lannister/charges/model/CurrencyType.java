@@ -6,10 +6,11 @@ import lombok.Getter;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public enum CurrencyTypes {
-    ARS("Pesos", "ARS"),
-    Dollar("Dolar", "USD");
+public enum CurrencyType {
+    ARS("Pesos", "ARS", true),
+    Dollar("Dolar", "USD", false);
 
     String description;
     String identifier;
+    Boolean isDefault;
 }

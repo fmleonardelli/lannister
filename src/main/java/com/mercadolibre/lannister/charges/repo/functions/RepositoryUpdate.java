@@ -1,4 +1,4 @@
-package com.mercadolibre.lannister.charges.repo.interfaces;
+package com.mercadolibre.lannister.charges.repo.functions;
 
 import com.mercadolibre.lannister.charges.model.ChargeNotification;
 

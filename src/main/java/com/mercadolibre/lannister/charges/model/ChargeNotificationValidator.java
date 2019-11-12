@@ -12,7 +12,7 @@ public interface ChargeNotificationValidator {
         return Either.right(true);
     }
     default Either<Throwable, Boolean> checkCurrency(String currency) {
-        if (!List.of(CurrencyTypes.values()).map(CurrencyTypes::getIdentifier).exists(c -> c.equalsIgnoreCase(currency))) {
+        if (!List.of(CurrencyType.values()).map(CurrencyType::getIdentifier).exists(c -> c.equalsIgnoreCase(currency))) {
             return Either.left(new ValidationError("Currency type not supported: " + currency));
         }
         return Either.right(true);
