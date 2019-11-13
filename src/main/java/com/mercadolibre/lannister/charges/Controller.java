@@ -3,7 +3,6 @@ package com.mercadolibre.lannister.charges;
 import com.mercadolibre.lannister.charges.api.ApiError;
 import com.mercadolibre.lannister.charges.api.Paginated;
 import com.mercadolibre.lannister.charges.api.ValidationError;
-import io.vavr.collection.List;
 import io.vavr.control.Either;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

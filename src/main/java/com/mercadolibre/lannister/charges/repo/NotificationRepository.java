@@ -27,7 +27,6 @@ import static io.vavr.API.Right;
 public class NotificationRepository extends Repository<ChargeNotification> {
 
     Logger logger = LoggerFactory.getLogger(NotificationRepository.class);
-    JacksonMongoCollection<ChargeNotification> collection;
     ObjectMapper objectMapper;
 
      public NotificationRepository(MongoClient client, String databaseName, String collectionName, ObjectMapper mapper) {

@@ -8,6 +8,8 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 
+import java.time.Instant;
+
 @Component
 public class KafkaMessageProducer {
 
@@ -18,6 +20,6 @@ public class KafkaMessageProducer {
     private String topicName;
 
     public ListenableFuture<SendResult<String, EventApi>> sendMessage(EventApi eventApi) {
-        return kafkaTemplate.send(topicName, eventApi);
+        return kafkaTemplate.send(topicName, Instant.now().toString(), eventApi);
     }
 }

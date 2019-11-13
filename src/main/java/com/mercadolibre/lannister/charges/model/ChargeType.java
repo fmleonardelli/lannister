@@ -7,9 +7,9 @@ import lombok.Getter;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public enum ChargeTypes {
+public enum ChargeType {
 
-    MARKETPLACE("MARKETPLACE", List.of("CLASIFICADO", "VENTA", "ENVÍO")),
+    MARKETPLACE("MARKETPLACE", List.of("CLASIFICADO", "VENTA", "ENVIO")),
     SERVICES("CREDITO", List.of("FIDELIDAD", "PUBLICIDAD")),
     EXTERNAL("EXTERNO", List.of("MERCADOPAGO", "MERCADOSHOP"));
 

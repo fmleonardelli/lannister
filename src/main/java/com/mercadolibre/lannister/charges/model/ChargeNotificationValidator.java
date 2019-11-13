@@ -6,7 +6,7 @@ import io.vavr.control.Either;
 
 public interface ChargeNotificationValidator {
     default Either<Throwable, Boolean> checkType(String type) {
-        if (!List.of(ChargeTypes.values()).flatMap(ChargeTypes::getTypes).exists(t -> t.equalsIgnoreCase(type))){
+        if (!List.of(ChargeType.values()).flatMap(ChargeType::getTypes).exists(t -> t.equalsIgnoreCase(type))){
             return Either.left(new ValidationError("Charge type not supported: " + type));
         }
         return Either.right(true);

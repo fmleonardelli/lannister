@@ -27,8 +27,9 @@ public class KafkaConfigProducer {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         props.put(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, 5000);
-        props.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 3000);
+        props.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 30000);
         props.put(ProducerConfig.RETRIES_CONFIG, 0);
+        props.put(ProducerConfig.ACKS_CONFIG, "1");
 
         return props;
     }

@@ -17,7 +17,7 @@ public class TaskParametersRepository implements ParametersRepository {
         return Option.none();
     }
     public Map<String, Object> toMapForRepo() {
-        val query = new Document("$in", List.of(NotificationState.values()).filter(s -> s.equals(NotificationState.PROCESSED)).map(Enum::toString).toJavaList());
+        val query = new Document("$in", List.of(NotificationState.values()).filter(s -> !s.equals(NotificationState.PROCESSED)).map(Enum::toString).toJavaList());
         return  io.vavr.collection.HashMap.of("state", query);
     }
 }
