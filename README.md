@@ -31,7 +31,7 @@ Lannister es una aplicación desarrollada sobre el framework spring boot.
 Para lanzarla se debe ejecutar el comando **mvn spring-boot:run** en la carpeta root del proyecto. 
 
 ### Wiki
-Para más información ingresar a la Wiki.
+Para más información ingresar a la [Wiki](https://github.com/fmleonardelli/lannister/wiki).
 
 ### Autor
 * **Facundo Leonardelli**: facundoleonardelli@gmail.com
