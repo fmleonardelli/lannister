@@ -25,12 +25,12 @@ public class ChargesController implements Controller<EventApi>{
     }
 
     @GetMapping("charges")
-    public ResponseEntity<Paginated<EventApi>> getCharges(@RequestParam(required = false) String eventType,
-                                                          @RequestParam(required = false) String eventId,
+    public ResponseEntity<Paginated<EventApi>> getCharges(@RequestParam(required = false) String event_type,
+                                                          @RequestParam(required = false) String event_id,
                                                           @RequestParam(required = false) String user_id,
                                                           @RequestParam(required = false) Integer limit,
                                                           @RequestParam(required = false) Integer offset) throws Throwable {
-        val parametersApi = new ChargesParametersApi(Option.of(eventType), Option.of(eventId), Option.of(user_id), Option.of(limit), Option.of(offset));
+        val parametersApi = new ChargesParametersApi(Option.of(event_type), Option.of(event_id), Option.of(user_id), Option.of(limit), Option.of(offset));
         logger.info("Get charges event api: " + parametersApi.toString());
         return convertToResponsePaginated(chargesService.findCharges(parametersApi));
     }

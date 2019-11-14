@@ -15,8 +15,8 @@ public class EventApi {
      Double amount;
      String currency;
      String userId;
-     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
      String eventType;
+     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
      Instant date;
 
      public static Function1<ChargeNotification, EventApi> toEventApi() {
