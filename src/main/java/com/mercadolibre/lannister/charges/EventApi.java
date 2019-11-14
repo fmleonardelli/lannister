@@ -1,5 +1,6 @@
 package com.mercadolibre.lannister.charges;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mercadolibre.lannister.charges.model.ChargeNotification;
 import io.vavr.Function1;
 import lombok.*;
@@ -14,6 +15,7 @@ public class EventApi {
      Double amount;
      String currency;
      String userId;
+     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
      String eventType;
      Instant date;
 
