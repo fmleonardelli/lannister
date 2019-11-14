@@ -10,6 +10,9 @@ El proyecto para un correcto funcionamiento requiere tener instalado el siguient
 - [MongoDB](https://www.mongodb.com/es): desde versión 3.6 en adelante. Base de datos no relacional que se ejecuta escuchando en el puerto por default 27017.
 - [Apache Kafka](https://kafka.apache.org/): la app se comunica con otros microservicios mediante una cola de mensajería en la cual cumple el rol de productor. El servicio de mensajería tiene que estar configurado para escuchar tráfico por el puerto 9092.
 
+Crear el topico con el siguiente comando:
+> bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic charges
+
 ### Configuración
 El IDE utilizado para el desarrollo de la app fue IntelliJ, por lo tanto, si se quiere utilizar otro se deberá buscar las alternativas propuestas por el entorno utilizado.
 
