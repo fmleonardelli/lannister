@@ -1,6 +1,5 @@
 package com.mercadolibre.lannister.charges.kafka;
 
-import com.mercadolibre.lannister.charges.EventApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -14,12 +13,12 @@ import java.time.Instant;
 public class KafkaMessageProducer {
 
     @Autowired
-    private KafkaTemplate<String, EventApi> kafkaTemplate;
+    private KafkaTemplate<String, EventNotification> kafkaTemplate;
 
     @Value(value = "${message.topic.name}")
     private String topicName;
 
-    public ListenableFuture<SendResult<String, EventApi>> sendMessage(EventApi eventApi) {
-        return kafkaTemplate.send(topicName, Instant.now().toString(), eventApi);
+    public ListenableFuture<SendResult<String, EventNotification>> sendMessage(EventNotification notification) {
+        return kafkaTemplate.send(topicName, Instant.now().toString(), notification);
     }
 }

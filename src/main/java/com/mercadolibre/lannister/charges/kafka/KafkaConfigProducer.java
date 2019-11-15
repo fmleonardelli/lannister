@@ -1,6 +1,5 @@
 package com.mercadolibre.lannister.charges.kafka;
 
-import com.mercadolibre.lannister.charges.EventApi;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +21,13 @@ public class KafkaConfigProducer {
 
     @Bean
     public Map<String, Object> producerConfigs() {
+
+        String username = "fsbhoaeu";
+        String password = "DM7fPrkTtyq35aHKSGJoIQBZwVURAZA_";
+
+        String jaasTemplate = "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"%s\" password=\"%s\";";
+        String jaasCfg = String.format(jaasTemplate, username, password);
+
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -30,17 +36,20 @@ public class KafkaConfigProducer {
         props.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 30000);
         props.put(ProducerConfig.RETRIES_CONFIG, 0);
         props.put(ProducerConfig.ACKS_CONFIG, "1");
+        props.put("security.protocol", "SASL_SSL");
+        props.put("sasl.mechanism", "SCRAM-SHA-256");
+        props.put("sasl.jaas.config", jaasCfg);
 
         return props;
     }
 
     @Bean
-    public ProducerFactory<String, EventApi> producerFactory() {
+    public ProducerFactory<String, EventNotification> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, EventApi> kafkaTemplate() {
+    public KafkaTemplate<String, EventNotification> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
