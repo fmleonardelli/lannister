@@ -21,10 +21,10 @@ public class KafkaService {
     NotificationRepository repository;
 
     public void notifyToQueue(EventApi event, ChargeNotification chargeNotification) {
-        ListenableFuture<SendResult<String, EventApi>> notify = producer.sendMessage(event);
-        notify.addCallback(new ListenableFutureCallback<SendResult<String, EventApi>>() {
+        ListenableFuture<SendResult<String, EventNotification>> notify = producer.sendMessage(EventNotification.map().apply(event));
+        notify.addCallback(new ListenableFutureCallback<SendResult<String, EventNotification>>() {
             @Override
-            public void onSuccess(SendResult<String, EventApi> result) {
+            public void onSuccess(SendResult<String, EventNotification> result) {
                 updateNotifyState(chargeNotification.withState(NotificationState.PROCESSED));
             }
 
