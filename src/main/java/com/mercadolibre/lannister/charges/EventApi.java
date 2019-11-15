@@ -5,6 +5,7 @@ import com.mercadolibre.lannister.charges.model.ChargeNotification;
 import io.vavr.Function1;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
@@ -13,14 +14,18 @@ import java.time.Instant;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class EventApi {
      @NotNull
+     @NotBlank
      String eventId;
      @NotNull
      Double amount;
      @NotNull
+     @NotBlank
      String currency;
      @NotNull
+     @NotBlank
      String userId;
      @NotNull
+     @NotBlank
      String eventType;
      @NotNull
      @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")

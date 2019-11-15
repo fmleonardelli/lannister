@@ -30,9 +30,18 @@ public class ChargesController implements Controller<EventApi>{
     public ResponseEntity<Paginated<EventApi>> getCharges(@RequestParam(required = false) String event_type,
                                                           @RequestParam(required = false) String event_id,
                                                           @RequestParam(required = false) String user_id,
+                                                          @RequestParam(required = false) String date_from,
+                                                          @RequestParam(required = false) String date_to,
                                                           @RequestParam(required = false) Integer limit,
                                                           @RequestParam(required = false) Integer offset) throws Throwable {
-        val parametersApi = new ChargesParametersApi(Option.of(event_type), Option.of(event_id), Option.of(user_id), Option.of(limit), Option.of(offset));
+        val parametersApi = new ChargesParametersApi(
+                Option.of(event_type),
+                Option.of(event_id),
+                Option.of(user_id),
+                Option.of(date_from),
+                Option.of(date_to),
+                Option.of(limit),
+                Option.of(offset));
         logger.info("Get charges event api: " + parametersApi.toString());
         return convertToResponsePaginated(chargesService.findCharges(parametersApi));
     }
