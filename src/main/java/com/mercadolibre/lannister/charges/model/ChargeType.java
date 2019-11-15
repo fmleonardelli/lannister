@@ -10,7 +10,7 @@ import lombok.Getter;
 public enum ChargeType {
 
     MARKETPLACE("MARKETPLACE", List.of("CLASIFICADO", "VENTA", "ENVIO")),
-    SERVICES("CREDITO", List.of("FIDELIDAD", "PUBLICIDAD")),
+    SERVICES("SERVICIOS", List.of("CREDITO", "FIDELIDAD", "PUBLICIDAD")),
     EXTERNAL("EXTERNO", List.of("MERCADOPAGO", "MERCADOSHOP"));
 
     String category;
