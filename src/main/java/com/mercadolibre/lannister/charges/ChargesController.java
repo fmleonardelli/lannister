@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 public class ChargesController implements Controller<EventApi>{
 
@@ -19,7 +21,7 @@ public class ChargesController implements Controller<EventApi>{
     private ChargesService chargesService;
 
     @PostMapping("charges")
-    public ResponseEntity<EventApi> notifyCharge(@RequestBody EventApi event) throws Throwable {
+    public ResponseEntity<EventApi> notifyCharge(@Valid @RequestBody EventApi event) throws Throwable {
         logger.info("Notify Charge with params: " + event.toString());
         return convertToResponse(chargesService.notifyCharge(event));
     }

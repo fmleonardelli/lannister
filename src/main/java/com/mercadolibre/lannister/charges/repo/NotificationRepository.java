@@ -49,7 +49,7 @@ public class NotificationRepository extends Repository<ChargeNotification> {
     }
 
     public Either<Throwable, Paginated<ChargeNotification>> findByPaginated(ParametersRepository parameters) {
-        return findBy(parameters).flatMap(l -> count(parameters).map(c -> new Paginated<>(l, parameters.offset(), parameters.limit(), c)));
+        return findBy(parameters).flatMap(l -> count(parameters).map(c -> new Paginated<>(l, parameters.offset(), parameters.limit(), (c % parameters.limit() == 0) ? c / parameters.limit() : (c / parameters.limit()) + 1 )));
     }
 
     public Either<Throwable, ChargeNotification> save(ChargeNotification notification) {
