@@ -3,6 +3,7 @@ package com.mercadolibre.lannister.charges.model;
 import io.vavr.control.Option;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,7 +17,7 @@ public class ChargeNotificationTest {
                 .builder()
                 .type("type")
                 .eventId("eventId")
-                .amount(Double.MIN_VALUE)
+                .amount(BigDecimal.ZERO)
                 .currency(CurrencyType.ARS.identifier)
                 .userId("userId")
                 .date(Instant.now())
@@ -41,7 +42,7 @@ public class ChargeNotificationTest {
                 .builder()
                 .type("WITHOUT TYPE")
                 .eventId("eventId")
-                .amount(Double.MIN_VALUE)
+                .amount(BigDecimal.ZERO)
                 .currency(CurrencyType.ARS.identifier)
                 .userId("userId")
                 .date(Instant.now())
@@ -57,7 +58,7 @@ public class ChargeNotificationTest {
                 .builder()
                 .type("CLASIFICADO")
                 .eventId("eventId")
-                .amount(Double.MIN_VALUE)
+                .amount(BigDecimal.ZERO)
                 .currency(CurrencyType.ARS.identifier)
                 .userId("userId")
                 .date(Instant.now())
@@ -73,7 +74,7 @@ public class ChargeNotificationTest {
                 .builder()
                 .type("CLASIFICADO")
                 .eventId("eventId")
-                .amount(Double.MIN_VALUE)
+                .amount(BigDecimal.ZERO)
                 .currency("currency")
                 .userId("userId")
                 .date(Instant.now())
@@ -89,7 +90,7 @@ public class ChargeNotificationTest {
                 .builder()
                 .type("CLASIFICADO")
                 .eventId("eventId")
-                .amount(Double.MIN_VALUE)
+                .amount(BigDecimal.ZERO)
                 .currency(CurrencyType.ARS.identifier)
                 .userId("userId")
                 .date(Instant.now())
@@ -105,7 +106,7 @@ public class ChargeNotificationTest {
                 .builder()
                 .type("CLASIFICADO")
                 .eventId("eventId")
-                .amount(-1d)
+                .amount(new BigDecimal(-1))
                 .currency(CurrencyType.ARS.identifier)
                 .userId("userId")
                 .date(Instant.now())
@@ -121,7 +122,7 @@ public class ChargeNotificationTest {
                 .builder()
                 .type("CLASIFICADO")
                 .eventId("eventId")
-                .amount(500d)
+                .amount(new BigDecimal(500))
                 .currency(CurrencyType.ARS.identifier)
                 .userId("userId")
                 .date(Instant.now())

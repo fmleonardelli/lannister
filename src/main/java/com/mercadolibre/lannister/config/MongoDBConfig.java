@@ -24,6 +24,7 @@ public class MongoDBConfig {
         val objectMapper = new ObjectMapper();
         objectMapper.registerModule(new VavrModule(new VavrModule.Settings().deserializeNullAsEmptyCollection(true)));
         objectMapper.registerModule(new CustomDateModule());
+        objectMapper.registerModule(new BigDecimalModule());
         objectMapper.registerModule(new ParameterNamesModule(JsonCreator.Mode.PROPERTIES));
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
         objectMapper.configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false);

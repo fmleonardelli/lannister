@@ -3,10 +3,14 @@ package com.mercadolibre.lannister.charges;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mercadolibre.lannister.charges.model.ChargeNotification;
 import io.vavr.Function1;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Value
@@ -17,7 +21,7 @@ public class EventApi {
      @NotBlank
      String eventId;
      @NotNull
-     Double amount;
+     BigDecimal amount;
      @NotNull
      @NotBlank
      String currency;

@@ -5,13 +5,14 @@ import io.vavr.Function1;
 import lombok.AllArgsConstructor;
 import lombok.Value;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Value
 @AllArgsConstructor
 public class EventNotification {
     String eventId;
-    Double amount;
+    BigDecimal amount;
     String currency;
     String userId;
     String eventType;

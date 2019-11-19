@@ -1,14 +1,18 @@
 package com.mercadolibre.lannister.charges.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.NumberDeserializers;
 import com.mercadolibre.lannister.charges.EventApi;
 import io.vavr.Function1;
 import io.vavr.control.Either;
 import io.vavr.control.Option;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
 
+import java.math.BigDecimal;
 import java.time.Instant;
-
-import static io.vavr.API.For;
 
 @Value
 @Builder(toBuilder = true)
@@ -16,7 +20,8 @@ import static io.vavr.API.For;
 public class ChargeNotification implements ChargeNotificationValidator {
      String type;
      String eventId;
-     Double amount;
+     @JsonDeserialize(using = NumberDeserializers.BigDecimalDeserializer.class)
+     BigDecimal amount;
      String currency;
      String userId;
      Instant date;
@@ -39,7 +44,7 @@ public class ChargeNotification implements ChargeNotificationValidator {
           return x -> ChargeNotification.builder()
                   .type(x.getEventType())
                   .eventId(x.getEventId())
-                  .amount(x.getAmount())
+                  .amount(x.getAmount().setScale(2, BigDecimal.ROUND_HALF_UP))
                   .currency(x.getCurrency())
                   .userId(x.getUserId())
                   .date(x.getDate())
