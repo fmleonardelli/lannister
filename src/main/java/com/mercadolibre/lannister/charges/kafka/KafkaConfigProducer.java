@@ -24,15 +24,6 @@ public class KafkaConfigProducer {
     @Value("${spring.kafka.bootstrap-servers}")
     String bootstrapServers;
 
-    @Value("${spring.kafka.properties.security.protocol}")
-    String protocol;
-
-    @Value("${spring.kafka.properties.sasl.mechanism}")
-    String mechanism;
-
-    @Value("${spring.kafka.properties.sasl.jaas.config}")
-    String jaasCfg;
-
     @Bean
     public Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
@@ -43,9 +34,6 @@ public class KafkaConfigProducer {
         props.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 30000);
         props.put(ProducerConfig.RETRIES_CONFIG, 0);
         props.put(ProducerConfig.ACKS_CONFIG, "1");
-        props.put("security.protocol", protocol);
-        props.put("sasl.mechanism", mechanism);
-        props.put("sasl.jaas.config", jaasCfg);
         return props;
     }
 
